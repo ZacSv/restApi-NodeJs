@@ -1,3 +1,4 @@
+const teste = require("../mocks/teste");
 const users = require("../mocks/teste");
 
 //Definição da regra ou regras de negócio
@@ -33,7 +34,15 @@ module.exports = {
     req.on("data", (chunk) => {
       mensagem += chunk;
     });
-
-    resp.send(200, { Ok: true });
+    req.on("end", () => {
+      mensagem = JSON.parse(mensagem);
+      const lastUserId = teste[teste.length - 1].id;
+      const newUser = {
+        id: lastUserId + 1,
+        name: mensagem.name,
+      };
+      teste.push(newUser);
+      resp.send(200, newUser);
+    });
   },
 };
