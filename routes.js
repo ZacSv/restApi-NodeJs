@@ -21,4 +21,9 @@ module.exports = [
     method: "GET",
     handler: UserController.getUserById,
   },
+  {
+    enpoint: "/user",
+    method: "POST",
+    handler: UserController.createUser,
+  },
 ];

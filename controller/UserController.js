@@ -26,4 +26,14 @@ module.exports = {
     }
     resp.send(200, user);
   },
+
+  //Recebendo informações por meio do método Post
+  createUser(req, resp) {
+    let mensagem = "";
+    req.on("data", (chunk) => {
+      mensagem += chunk;
+    });
+
+    resp.send(200, { Ok: true });
+  },
 };
