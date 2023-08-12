@@ -16,7 +16,7 @@ module.exports = {
   },
   pageIni(req, resp) {
     resp.writeHead(200, { "content-type": "text/html" });
-    resp.end("<h1> API FUNCIONANDO </h1>");
+    resp.end("<h1> Servidor ativo</h1>");
   },
   getUserById(req, resp) {
     const { id } = req.params;
