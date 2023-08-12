@@ -28,6 +28,10 @@ const server = http.createServer((req, resp) => {
   if (route) {
     req.query = Object.fromEntries(parsedUrl.searchParams);
     req.params = { id };
+    resp.send = (statusCode, body) => {
+      resp.writeHead(statusCode, { "Content-Type": "application/json" });
+      resp.end(JSON.stringify({ body }));
+    };
 
     route.handler(req, resp);
   } else {

@@ -22,11 +22,9 @@ module.exports = {
     const { id } = req.params;
     const user = users.find((user) => user.id === Number(id));
     if (!user) {
-      resp.writeHead(400, { "Content-Type": "application/json" });
-      resp.end(JSON.stringify({ error: "User not found" }));
+      resp.send(400, "error: User not found");
     } else {
-      resp.writeHead(200, { "Content-Type": "application/json" });
-      resp.end(JSON.stringify({ user }));
+      resp.send(200, user);
     }
   },
 };
