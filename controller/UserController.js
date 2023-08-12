@@ -22,9 +22,8 @@ module.exports = {
     const { id } = req.params;
     const user = users.find((user) => user.id === Number(id));
     if (!user) {
-      resp.send(400, "error: User not found");
-    } else {
-      resp.send(200, user);
+      return resp.send(400, "error: User not found");
     }
+    resp.send(200, user);
   },
 };
