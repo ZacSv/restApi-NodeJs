@@ -1,6 +1,7 @@
 const http = require("http");
 const routes = require("./routes");
 const { URL } = require("url");
+const bodyParse = require("./helpers/bodyParse");
 const { parse } = require("path");
 
 const server = http.createServer((req, resp) => {
@@ -33,12 +34,16 @@ const server = http.createServer((req, resp) => {
       resp.end(JSON.stringify({ body }));
     };
 
-    route.handler(req, resp);
+    if (["PUT", "POST", "PATCH"].includes(req.method)) {
+      bodyParse(req, () => route.handler(req, resp));
+    } else {
+      route.handler(req, resp);
+    }
   } else {
-    console.log("lamentavel");
+    resp.writeHead(404, { "Content-Type": "application/json" });
+    resp.end(JSON.stringify({ error: "Route not found" }));
   }
 });
-
 server.listen(3000, () =>
   console.log("Server started at http://localhost:3000")
 );

@@ -30,19 +30,13 @@ module.exports = {
 
   //Recebendo informações por meio do método Post
   createUser(req, resp) {
-    let mensagem = "";
-    req.on("data", (chunk) => {
-      mensagem += chunk;
-    });
-    req.on("end", () => {
-      mensagem = JSON.parse(mensagem);
-      const lastUserId = teste[teste.length - 1].id;
-      const newUser = {
-        id: lastUserId + 1,
-        name: mensagem.name,
-      };
-      teste.push(newUser);
-      resp.send(200, newUser);
-    });
+    const { mensagem } = req;
+    const lastUserId = teste[teste.length - 1].id;
+    const newUser = {
+      id: lastUserId + 1,
+      name: mensagem.name,
+    };
+    teste.push(newUser);
+    resp.send(200, newUser);
   },
 };
