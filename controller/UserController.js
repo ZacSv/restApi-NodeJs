@@ -64,4 +64,17 @@ module.exports = {
 
     resp.send(200, { id, name });
   },
+  deleteUser(req, resp) {
+    let { id } = req.params;
+    id = Number(id);
+
+    const userExists = user.find((user) => user.id === id);
+
+    if (!userExists) {
+      return resp.send(400, { error: "User not found" });
+    }
+
+    user = user.filter((user) => user.id != id);
+    resp.send(200, { deleted: true });
+  },
 };

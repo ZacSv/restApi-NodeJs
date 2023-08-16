@@ -31,4 +31,9 @@ module.exports = [
     method: "PUT",
     handler: UserController.updateUser,
   },
+  {
+    enpoint: "/user/:id",
+    method: "DELETE",
+    handler: UserController.deleteUser,
+  },
 ];
