@@ -26,4 +26,9 @@ module.exports = [
     method: "POST",
     handler: UserController.createUser,
   },
+  {
+    enpoint: "/user/:id",
+    method: "PUT",
+    handler: UserController.updateUser,
+  },
 ];
